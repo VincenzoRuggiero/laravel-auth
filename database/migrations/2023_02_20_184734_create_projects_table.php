@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 20)->notnull();
+            $table->string('title', 200)->notnull();
+            $table->text('description')->notnull();
             $table->string('link', 100)->unique();
             $table->date('created')->notnull();
             $table->timestamps();
