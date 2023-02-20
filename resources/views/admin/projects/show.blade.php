@@ -14,6 +14,8 @@
                 <h3>Description</h3>
                 <p>{{ $project->description }}</p>
                 <a href="{{ $project->link }}" class="btn btn-primary">Open</a>
+                <a href="#" class="btn btn-success">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
                </div>
             </div>
         </div>
