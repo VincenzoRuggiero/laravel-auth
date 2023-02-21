@@ -12,11 +12,11 @@
                 <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">#ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col" >Description</th>
-                        <th scope="col">Link</th>
-                        <th scope="col">Created</th>
+                        <th>#ID</th>
+                        <th>Title</th>
+                        <th >Description</th>
+                        <th>Link</th>
+                        <th>Created</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -30,10 +30,10 @@
                         <td>
                           <a href="{{ route('admin.projects.show', $project->id )}}" class="btn btn-primary">Show</a>
                           <a href="{{ route('admin.projects.edit', $project->id )}}" class="btn btn-success">Edit</a>
-                          <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                          <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-danger" title="delete">Delete</button>
                           </form>
                         </td>
                       </tr>
@@ -43,4 +43,8 @@
             </div>
         </div>
    </div>
+@endsection
+
+@section('script')
+    @vite('resources/js/confirmDelete.js')
 @endsection
