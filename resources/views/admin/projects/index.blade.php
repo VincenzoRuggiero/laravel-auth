@@ -4,7 +4,7 @@
    <div class="container">
         <div class="row my-3">
           <div class="col-12 text-center">
-            <a class="btn btn-primary">Create Item</a>
+            <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">Create Item</a>
           </div>
         </div>
         <div class="row">
@@ -26,9 +26,10 @@
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->description }}</td>
                         <td>{{ $project->link }}</td>
+                        <td>{{ $project->created }}</td>
                         <td>
-                          <a href="" class="btn btn-primary">Show</a>
-                          <a href="" class="btn btn-success">Edit</a>
+                          <a href="{{ route('admin.projects.show', $project->id )}}" class="btn btn-primary">Show</a>
+                          <a href="{{ route('admin.projects.edit', $project->id )}}" class="btn btn-success">Edit</a>
                           <form action="" method="post">
                             @csrf
                             @method('DELETE')
