@@ -10,6 +10,12 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'link', 'created'
+        'title', 'description', 'link', 'created', 'slug'
     ];
+
+    //Function that show each item's title after the domain instead of it's id
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

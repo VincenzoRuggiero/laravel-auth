@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -62,6 +63,7 @@ class ProjectController extends Controller
             'created.required' => 'Inserire la data mancante',
         ]);
 
+        $formData['slug'] = Str::slug($formData['title']); //Makes a new string title from matching id
         $newProject = new Project();
         $newProject->fill($formData);
         $newProject->save();
@@ -77,7 +79,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        // Variables to navigate items back and forth from within another item
+        $next = Project::where('id', '>', $project->id)->orderBy('id')->first();
+        $prev = Project::where('id', '<', $project->id)->orderBy('id','desc')->first();
+
+        return view('admin.projects.show', compact('project', 'next', 'prev'));
     }
 
     /**

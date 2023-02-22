@@ -28,9 +28,9 @@
                         <td>{{ $project->link }}</td>
                         <td>{{ $project->created }}</td>
                         <td>
-                          <a href="{{ route('admin.projects.show', $project->id )}}" class="btn btn-primary">Show</a>
-                          <a href="{{ route('admin.projects.edit', $project->id )}}" class="btn btn-success">Edit</a>
-                          <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete">
+                          <a href="{{ route('admin.projects.show', $project->slug )}}" class="btn btn-primary">Show</a>
+                          <a href="{{ route('admin.projects.edit', $project->slug )}}" class="btn btn-success">Edit</a>
+                          <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST" class="delete">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" title="delete">Delete</button>
