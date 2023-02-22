@@ -53,12 +53,12 @@ class ProjectController extends Controller
         ], 
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
-            'title.size' => 'Il titolo supera i 200 caratteri massimi',
+            'title.max' => 'Il titolo supera i 200 caratteri massimi',
             'description.required' => 'La descrizione non può essere lasciata vuota',
-            'description.size' => 'La descrizione supera i 400 caratteri massimi',
+            'description.max' => 'La descrizione supera i 400 caratteri massimi',
             'link.required' => 'La url non può essere lasciata vuota',
-            'link.size' => 'La url supera i 400 caratteri massimi',
-            'link.url' => 'Questa url è già presente nel database',
+            'link.max' => 'La url supera i 400 caratteri massimi',
+            'link.url' => 'Inserisci una URL valida',
             'created.required' => 'Inserire la data mancante',
         ]);
 
@@ -102,18 +102,18 @@ class ProjectController extends Controller
     {
         $formData = $request->validate([
             'title' => ['required', 'max:200'],
-            'description' => 'required',
-            'link' => ['required', 'url',Rule::unique('projects')->ignore($project->id)],
+            'description' => ['required', 'max:400'],
+            'link' => ['required', 'max:400', 'url', Rule::unique('projects')->ignore($project->id)],
             'created' => 'required|date',
         ],
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
-            'title.size' => 'Il titolo supera i 200 caratteri massimi',
+            'title.max' => 'Il titolo supera i 200 caratteri massimi',
             'description.required' => 'La descrizione non può essere lasciata vuota',
-            'description.size' => 'La descrizione supera i 400 caratteri massimi',
+            'description.max' => 'La descrizione supera i 400 caratteri massimi',
             'link.required' => 'La url non può essere lasciata vuota',
-            'link.size' => 'La url supera i 400 caratteri massimi',
-            'link.url' => 'Questa url è già presente nel database',
+            'link.max' => 'La url supera i 400 caratteri massimi',
+            'link.url' => 'Inserisci una URL valida',
             'created.required' => 'Inserire la data mancante',
         ]);
 

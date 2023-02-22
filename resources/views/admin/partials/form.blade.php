@@ -1,5 +1,5 @@
-@foreach ($errors->all() as $error)
-@endforeach
+@foreach ($errors->all() as $message)@endforeach
+
 
 <form action="{{ route($routeName, $project) }}" method="POST">
 @csrf
@@ -9,7 +9,7 @@
         <input type="text" class="form-control @error('title') is-invalid @enderror" maxlength="200" name="title" value="{{ old('title', $project->title) }}">
         @error('title')
             <div class="invalid-feedback">
-                {{ $error }}
+                {{ $message }}
             </div>
         @enderror    
     </div>
@@ -18,7 +18,7 @@
         <textarea class="form-control @error('description') is-invalid @enderror" name="description">{{ old('description', $project->description) }}</textarea>
         @error('description')
             <div class="invalid-feedback">
-                {{ $error }}
+                {{ $message}}
             </div>
         @enderror    
     </div>
@@ -27,7 +27,7 @@
         <input type="text" class="form-control @error('link') is-invalid @enderror" name="link" value="{{ old('link', $project->link) }}">
         @error('link')
             <div class="invalid-feedback">
-                {{ $error }}
+                {{ $message }}
             </div>
         @enderror    
     </div>
@@ -36,7 +36,7 @@
         <input type="date" class="form-control @error('created') is-invalid @enderror" name="created" value="{{ old('created', $project->created) }}">
         @error('created')
             <div class="invalid-feedback">
-                {{ $error }}
+                {{ $message }}
             </div>
         @enderror    
     </div>
