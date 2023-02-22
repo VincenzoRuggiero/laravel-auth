@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -47,8 +48,18 @@ class ProjectController extends Controller
         $formData = $request->validate([
             'title' => 'required|max:200',
             'description' => 'required|max:400',
-            'link' => 'required|max:400|unique:projects',
+            'link' => 'required|url|max:400|unique:projects',
             'created' => 'required|date',
+        ], 
+        [
+            'title.required' => 'Il titolo non può essere lasciato vuoto',
+            'title.size' => 'Il titolo supera i 200 caratteri massimi',
+            'description.required' => 'La descrizione non può essere lasciata vuota',
+            'description.size' => 'La descrizione supera i 400 caratteri massimi',
+            'link.required' => 'La url non può essere lasciata vuota',
+            'link.size' => 'La url supera i 400 caratteri massimi',
+            'link.url' => 'Questa url è già presente nel database',
+            'created.required' => 'Inserire la data mancante',
         ]);
 
         $newProject = new Project();
@@ -92,8 +103,18 @@ class ProjectController extends Controller
         $formData = $request->validate([
             'title' => ['required', 'max:200'],
             'description' => 'required',
-            'link' => ['required', Rule::unique('projects')->ignore($project->id)],
+            'link' => ['required', 'url',Rule::unique('projects')->ignore($project->id)],
             'created' => 'required|date',
+        ],
+        [
+            'title.required' => 'Il titolo non può essere lasciato vuoto',
+            'title.size' => 'Il titolo supera i 200 caratteri massimi',
+            'description.required' => 'La descrizione non può essere lasciata vuota',
+            'description.size' => 'La descrizione supera i 400 caratteri massimi',
+            'link.required' => 'La url non può essere lasciata vuota',
+            'link.size' => 'La url supera i 400 caratteri massimi',
+            'link.url' => 'Questa url è già presente nel database',
+            'created.required' => 'Inserire la data mancante',
         ]);
 
         $project->update($formData);
