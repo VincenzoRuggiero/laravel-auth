@@ -41,8 +41,8 @@ class ProjectController extends Controller
         $formData = $request->all();
         $formData = $request->validate([
             'title' => 'required|max:200',
-            'description' => 'required',
-            'link' => 'required|unique:projects',
+            'description' => 'required|max:400',
+            'link' => 'required|max:400|unique:projects',
             'created' => 'required|date',
         ]);
 

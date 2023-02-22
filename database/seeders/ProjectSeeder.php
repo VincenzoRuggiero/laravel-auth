@@ -16,10 +16,10 @@ class ProjectSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for($i = 0; $i < 20; $i++){
+        for($i = 0; $i < 50; $i++){
             $newProject = new Project();
-            $newProject->title = $faker->sentence(4);
-            $newProject->description = $faker->text(30);
+            $newProject->title = $faker->sentence(2);
+            $newProject->description = $faker->sentence(2);
             $newProject->link = $faker->unique()->url();
             $newProject->created = $faker->dateTimeThisYear();
             $newProject->save();
