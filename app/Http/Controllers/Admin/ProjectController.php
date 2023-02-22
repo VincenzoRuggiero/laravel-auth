@@ -16,7 +16,12 @@ class ProjectController extends Controller
      */
     public function index()
     {   
-        $projects = Project::paginate(20);
+       
+        //$projects = Project::all();  >Lists all projects inside the table
+        //$projects = Project::simplePaginate(20);  >Paginates without showing the number of pages left
+        //$projects = Project::orderBy('created', 'DESC')->paginate(20); >Paginates and sorts items from recent to  oldest
+        
+        $projects = Project::paginate(20);  //Paginates and shows declared amount of items
         return view('admin.projects.index', compact('projects'));
     }
 
