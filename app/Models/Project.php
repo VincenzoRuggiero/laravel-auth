@@ -10,7 +10,7 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'link', 'created', 'slug'
+        'title', 'description', 'link', 'created', 'slug', 'image'
     ];
 
     //Function that show each item's title after the domain instead of it's id
