@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -23,7 +24,7 @@ class ProjectController extends Controller
         //$projects = Project::simplePaginate(20);  >Paginates without showing the number of pages left
         //$projects = Project::orderBy('created', 'DESC')->paginate(20); >Paginates and sorts items from recent to  oldest
         
-        $projects = Project::paginate(20);  //Paginates and shows declared amount of items
+        $projects = Project::orderBy('created', 'desc')->paginate(20);  //Paginates and shows declared amount of items
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -51,6 +52,7 @@ class ProjectController extends Controller
             'description' => 'required|max:400',
             'link' => 'required|url|max:400|unique:projects',
             'created' => 'required|date',
+            'image' => 'required|image|max:2048'
         ], 
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
@@ -61,9 +63,13 @@ class ProjectController extends Controller
             'link.max' => 'La url supera i 400 caratteri massimi',
             'link.url' => 'Inserisci una URL valida',
             'created.required' => 'Inserire la data mancante',
+            'image.required' => 'File immagine mancante',
+            'image.max' => 'Il file supera i 2mb di dimensione massima'
         ]);
 
         $formData['slug'] = Str::slug($formData['title']); //Makes a new string title from matching id
+        $formData['image'] = Storage::put('imgs/', $formData['image']);
+
         $newProject = new Project();
         $newProject->fill($formData);
         $newProject->save();
@@ -111,6 +117,7 @@ class ProjectController extends Controller
             'description' => ['required', 'max:400'],
             'link' => ['required', 'max:400', 'url', Rule::unique('projects')->ignore($project->id)],
             'created' => 'required|date',
+            'image' => 'required|image|max:2048'
         ],
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
@@ -121,6 +128,8 @@ class ProjectController extends Controller
             'link.max' => 'La url supera i 400 caratteri massimi',
             'link.url' => 'Inserisci una URL valida',
             'created.required' => 'Inserire la data mancante',
+            'image.required' => 'File immagine mancante',
+            'image.max' => 'Il file supera i 2mb di dimensione massima'
         ]);
 
         $project->update($formData);
